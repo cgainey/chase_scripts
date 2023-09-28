@@ -11,8 +11,17 @@ function createSheetsFromMainSheet() {
   var techLeaderSheet = spreadsheet.getSheetByName("TechLeader");
   var techLeaderData = techLeaderSheet.getDataRange().getValues();
   
+  var uncategorizedSheet = spreadsheet.getSheetByName("Uncategorized");
+  if (!uncategorizedSheet) {
+    uncategorizedSheet = spreadsheet.insertSheet("Uncategorized");
+    uncategorizedSheet.appendRow(mainSheet.getRange(1, 1, 1, mainSheet.getLastColumn()).getValues()[0]);
+  }
+  
+  var foundMatch = false;
   for (var i = 1; i < mainData.length; i++) {
     var mainValue = mainData[i][5]; // Value in Column F of MainSheet
+    foundMatch = false;
+    
     for (var j = 1; j < techLeaderData.length; j++) {
       var techLeaderValue = techLeaderData[j][0]; // Value in Column A of TechLeader sheet
       
@@ -24,8 +33,13 @@ function createSheetsFromMainSheet() {
           targetSheet.appendRow(mainSheet.getRange(1, 1, 1, mainSheet.getLastColumn()).getValues()[0]);
         }
         targetSheet.appendRow(mainData[i]);
+        foundMatch = true;
         break;
       }
+    }
+    
+    if (!foundMatch) {
+      uncategorizedSheet.appendRow(mainData[i]);
     }
   }
 }
