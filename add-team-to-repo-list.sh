@@ -28,7 +28,7 @@ REPO_LIST_FILE=$4
 # Loop through the list of repositories in the file and add the team with the specified permission level
 while read repo; do
   echo "Adding team $TEAM_NAME with permission $PERMISSION_LEVEL to repository $repo"
-  curl -X PUT -H "Authorization: token YOU_GITHUB_TOKEN" -H "Content-Type: application/json" \
+  curl -X PUT -H "Authorization: token YOUR_GITHUB_TOKEN" -H "Content-Type: application/json" \
   -d "{\"permission\":\"$PERMISSION_LEVEL\"}" \
   "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/repos/$ORG_NAME/$repo"
 done < $REPO_LIST_FILE
