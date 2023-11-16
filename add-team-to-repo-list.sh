@@ -5,8 +5,12 @@
 #  To run: ./add_team_to_repo_list.sh <github-organization> <github-team-name> <permission-level> <repo-list-file>
 #
 #  Replace YOUR_GITHUB_TOKEN with your personal access token you generated from github
+#  
+#  Team names should only be the name. Ex https://github.com/orgs/RedVentures/teams/SOME_TEAM should only be listed as SOME_TEAM for the script.
 #
-#  Permission level options: pull, triage, push, maintain, admin. Default = push
+#  Likewise the repo list should only contain names of the repos. Ex https://github.com/RedVentures/SOME_REPO should only list SOME_REPO in the text file
+#
+#  Permission level options: pull, triage, push, maintain, admin. Default = push. push = write / pull = read.
 #
 #  The repo list file works with a txt file. Possibly other file formats but I did not test
 
