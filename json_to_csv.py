@@ -1,3 +1,6 @@
+# Made specifically for json from Postman
+# Postman has no API we have access to for user data so I grab it from the browser inspect tab and pull out the needed fields using this 
+
 import json
 import csv
 
