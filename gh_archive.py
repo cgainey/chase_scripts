@@ -1,8 +1,15 @@
+# For archiving github repos from a list. csv or txt work.
+# Enter the repo with the full URL
+# Make sure your PAT is authorized for any org the repos may live
+# usage: python3 gh_archive.py <repo_list> <token> 
+# Any unsuccessful archives will be added to a txt file called failed_archiving.txt
+
 import requests #this is for getting errors back
 import csv      #this is in case I want to use a csv over .txt
 import argparse #because I want command line arguments 
 from urllib.parse import urlparse #because i want to grab org and repo from link
 
+#does the thing
 def archive_repo(org_name, token, repo_name):
     url = f"https://api.github.com/repos/{org_name}/{repo_name}" 
     headers = {
@@ -16,7 +23,7 @@ def archive_repo(org_name, token, repo_name):
     if response.status_code == 200:
         print(f"Repository {repo_name} archived successfully.")
     else:
-        print(f"Failed to archive repository {repo_name}. Status code: {response.status_code}")
+        print(f"Failed to archive repository {repo_name}. Status code: {response.status_code}") #if it fails prints to console but also writes to a text file
         print(response.json())
         with open("failed_archiving.txt", "a") as log_file:
             log_file.write(f"Failed to archive repository: {repo_name} -- ")
@@ -40,6 +47,6 @@ for line in lines:
     if len(path_parts) >= 3:  # Check if the URL format is correct
         org_name = path_parts[1]
         repo_name = path_parts[2]
-        archive_repo(org_name, args.token, repo_name)
+        archive_repo(org_name, args.token, repo_name) #calls the thing to do the thing
     else:
         print(f"Invalid repository URL format: {repo_url}. Skipping...")
