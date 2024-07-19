@@ -45,7 +45,7 @@ if response.status_code == 200:
         for name in all_repo_names:
             file.write(name + '\n')
 
-    print("All repository names have been saved to repository_names1.txt")
+    print("All repository names have been saved to repository_names.txt")
 
 else:
     print("Failed to fetch repositories. Status code:", response.status_code)
